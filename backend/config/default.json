@@ -1,0 +1,67 @@
+{
+  "app-name": "News App",
+
+  "author": "Marcus Victor P. Martins",
+
+  "environment": "prod",
+
+  "app-messages": {
+    "contact-info": "entre em contato com a TI informando o código do erro.",
+
+    "error-messages": {
+      "auth-failed": {
+        "code": "auth-001",
+        "what": "Usuário e/ou senha inválido(s). ",
+        "workaround": "Por favor tente novamente."
+      },
+
+      "auth-info-missing": {
+        "code": "auth-002",
+        "what": "Acesso negado. Usuário não autenticado.",
+        "workaround": " "
+      },
+
+      "invalid-auth-token": {
+        "code": "auth-003",
+        "what": "Acesso negado. Token inválido.",
+        "workaround": " "
+      },
+
+      "notAdmin": {
+        "code": "auth-004",
+        "what": "Acesso negado. Operação requer papel de administrador.",
+        "workaround": " "
+      },
+
+      "expired-auth-token": {
+        "code": "auth-005",
+        "what": "Acesso negado. Token expirado.",
+        "workaround": " "
+      },
+
+      "news-not-found": {
+        "code": "news-001",
+        "what": "Notícia não encontrada.",
+        "workaround": " "
+      },
+
+      "news-error": {
+        "code": "news-002",
+        "what": null,
+        "workaround": null
+      },
+
+      "invalid-news": {
+        "code": "news-003",
+        "what": null,
+        "workaround": "Corrija as informações inválidas e tente novamente."
+      },
+
+      "news-forbidden": {
+        "code": "news-005",
+        "what": "Usuário sem permissão para executar essa operação.",
+        "workaround": " "
+      }
+    }
+  }
+}
