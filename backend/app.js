@@ -5,7 +5,7 @@ const helmet = require("helmet");
 const config = require("config");
 const cors = require("cors");
 
-const mongoConnect = require("./util/database");
+const { mongoConnect } = require("./util/database");
 
 const authRoutes = require("./routes/auth");
 const newsRoutes = require("./routes/news");

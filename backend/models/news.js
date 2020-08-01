@@ -1,22 +1,7 @@
 const Joi = require("joi");
 const config = require("config");
-
-// TODO: mongo
-
-let newsArray = [
-  {
-    _id: 1,
-    title: "Uma notícia bombástica",
-    content: "Marcus Martins consegue vaga no processo de seleção!",
-    createdAt: Date.now(),
-  },
-  {
-    _id: 2,
-    title: "Uma outra notícia",
-    content: "Chega ao Brasil a vacina contra o coronavirus",
-    createdAt: Date.now(),
-  },
-];
+const mongodb = require("mongodb");
+const { getDb } = require("../util/database");
 
 const joiSchema = Joi.object({
   title: Joi.string().max(100).required(),
@@ -24,42 +9,44 @@ const joiSchema = Joi.object({
 });
 
 module.exports = class News {
-  constructor(_id, title, content) {
-    this._id = _id;
+  constructor(title, content, id) {
     this.title = title;
     this.content = content;
     this.createdAt = Date.now();
+    this._id = id ? new mongodb.ObjectId(id) : null;
   }
 
   static validate(news) {
     return joiSchema.validate(news);
   }
 
-  // TODO: mongo
   static async fetchAll() {
-    return newsArray;
+    return await getDb().collection("news").find().toArray();
   }
 
-  // TODO: mongo
   static async findNewsById(id) {
-    const news = newsArray.find((n) => n._id === id);
-    return news ? [news] : [];
+    return await getDb()
+      .collection("news")
+      .find({ _id: new mongodb.ObjectId(id) })
+      .next();
   }
 
-  // TODO: mongo
   static async deleteById(id) {
-    newsArray = newsArray.filter((n) => n._id !== id);
+    return await getDb()
+      .collection("news")
+      .deleteOne({ _id: new mongodb.ObjectId(id) });
   }
 
-  // TODO: mongo
   async save() {
-    if (!this._id) {
-      this._id = Math.floor(Date.now() / 1000);
-    } else {
-      newsArray = newsArray.filter((n) => n._id != this._id);
-    }
-    newsArray.push(this);
+    const db = getDb();
 
+    if (this._id) {
+      // Update the news
+      await db.collection("news").updateOne({ _id: this._id }, { $set: this });
+    } else {
+      // Insert the news
+      await db.collection("news").insertOne(this);
+    }
     return this;
   }
 };
