@@ -1,0 +1,15 @@
+FROM node:12.18
+
+WORKDIR '/app'
+RUN npm i -g nodemon
+COPY package.json .
+RUN npm i
+
+# A cópia abaixo não é necessária em desenvolvimento por causa do mapeamento
+# dos volumes. O conteiner irá utilizar o código fonte da máquina principal
+# e é isso que permite que o app seja atualizado sempre que o código for 
+# modificado e salvo
+#COPY . .
+
+#CMD ["node", "app.js"]
+#CMD ["nodemon", "-L", "app.js"]

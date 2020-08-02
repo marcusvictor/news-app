@@ -1,0 +1,93 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Trebuchet MS", sans-serif;
+  color: #002c6f;
+  font-size: 0.95rem;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/*  links dentro das tables que não sejam do tipo botão   */
+td a:not(.btn),
+a:hover {
+  text-decoration: underline;
+  color: inherit;
+}
+
+.btn-blue,
+.btn-blue:hover {
+  background-color: #002c6f;
+  color: white;
+}
+
+.card {
+  width: 65%;
+}
+
+.sweet-loading {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.container {
+  margin-top: 8em;
+  height: 80vh;
+}
+
+.home-img {
+  background-image: url("./assets/images/sede01.jpg");
+  background-repeat: no-repeat;
+  background-position-x: center;
+  background-size: auto 85%;
+  height: 100%;
+}
+
+/*
+.btn,
+.btn-sm {
+  border-radius: 0;
+}
+*/
+
+.clickableIcon {
+  cursor: pointer;
+  font-size: 1.3rem;
+  margin-right: 1.5rem;
+}
+
+.fa-file-alt {
+  font-size: 1.3rem;
+}
+
+@media (max-height: 55rem) {
+  .container {
+    height: 77vh;
+  }
+}
+
+@media (max-height: 45rem) {
+  .container {
+    height: 72vh;
+  }
+}
+
+@media (max-height: 35rem) {
+  .container {
+    height: 62vh;
+  }
+}
+
+/* code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+.clickable {
+  cursor: pointer;
+} */

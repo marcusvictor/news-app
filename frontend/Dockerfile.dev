@@ -1,0 +1,12 @@
+FROM node:alpine
+WORKDIR '/app'
+COPY package.json .
+RUN npm i
+
+# A cópia abaixo não é necessária em desenvolvimento por causa do mapeamento
+# dos volumes. O conteiner irá utilizar o código fonte da máquina física
+# e é isso que permite que o app seja atualizado sempre que o código for 
+# modificado e salvo
+#COPY . .
+
+#CMD ["npm", "start"]
