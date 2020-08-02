@@ -6,6 +6,7 @@ import Modal from "../common/modal";
 import Spinner from "../common/spinner";
 import { getCurrentDateAsString } from "../../utils/date";
 import { getNews, deleteNews } from "../../services/newsService";
+import { getCurrentUser } from "../../services/authService";
 
 const News = () => {
   const [loading, setloading] = useState(true);
@@ -25,9 +26,15 @@ const News = () => {
     fetchData();
   }, []);
 
+  const markNewsToBeDeletd = (id) => {
+    const userRoles = getCurrentUser().roles;
+
+    if (userRoles.find((r) => r === "admin")) setNewsIdToBeDeleted(id);
+    else setNewsIdToBeDeleted(null);
+  };
+
   const renderNews = () => {
-    return (
-      newsArray &&
+    return newsArray.length > 0 ? (
       newsArray.map((n) => (
         <div key={n._id} className="card mb-4">
           <div className="card-body">
@@ -39,7 +46,7 @@ const News = () => {
             <div className="row flex-row-reverse">
               <i
                 className="fas fa-trash clickableIcon text-danger"
-                onClick={setNewsIdToBeDeleted.bind(this, n._id)}
+                onClick={markNewsToBeDeletd.bind(this, n._id)}
                 data-toggle="modal"
                 data-target="#deleteModal"
                 //data-backdrop="static"
@@ -55,6 +62,8 @@ const News = () => {
           </div>
         </div>
       ))
+    ) : (
+      <h3>Não há notícias cadastradas</h3>
     );
   };
 
@@ -83,9 +92,14 @@ const News = () => {
       <div className="row mt-4 justify-content-center">{renderNews()}</div>
       <Modal
         id="deleteModal"
-        title="Confirmação de exclusão"
-        body={`Tem certeza que deseja excluir a notícia?`}
+        title={newsIdToBeDeleted ? "Confirmação de exclusão" : "Acesso negado"}
+        body={
+          newsIdToBeDeleted
+            ? "Tem certeza que deseja excluir a notícia?"
+            : "Usuário sem permissão para excluir notícias"
+        }
         action={handleDelete}
+        displayButton={newsIdToBeDeleted}
         buttonText="Excluir"
       />
     </Fragment>

@@ -18,12 +18,12 @@ fakeAuth = (req, res, next) => {
 
   let userObj;
   switch (username) {
-    case "publisher":
+    case "admin":
       userObj = {
-        name: "Fake Publisher",
-        username: "publisher",
-        email: "publisher@news.com.br",
-        roles: ["publisher"],
+        name: "Usuário administrador",
+        username: "admin",
+        email: "admin@news.com.br",
+        roles: ["admin"],
       };
       break;
 
@@ -32,7 +32,7 @@ fakeAuth = (req, res, next) => {
         name:
           username.charAt(0).toUpperCase() + username.slice(1) + " da Silva",
         username: username,
-        email: "user@news.com.br",
+        email: `${username}@news.com.br`,
         roles: ["user"],
       };
   }
