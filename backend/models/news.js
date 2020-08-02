@@ -4,6 +4,7 @@ const mongodb = require("mongodb");
 const { getDb } = require("../util/database");
 
 const joiSchema = Joi.object({
+  _id: Joi.string(),
   title: Joi.string().max(300).required(),
   content: Joi.string().max(4000).required(),
 });
