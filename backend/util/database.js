@@ -15,7 +15,6 @@ const mongoConnect = (callback) => {
     })
     .catch((err) => {
       console.error("Error occurred creating database connection\n\n", err);
-      //console.log("");
       console.log("\nExiting process");
       process.exit(1);
     });

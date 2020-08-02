@@ -81,14 +81,6 @@ const NewsForm = (props) => {
 
       props.history.push("/news");
     } catch (ex) {
-      /* if (ex.response && ex.response.status === 400) {
-        if (ex.response.data.column) {
-          const errors = { ...this.errors };
-          errors[ex.response.data.column] = ex.response.data.what;
-          //console.log(errors);
-          this.setState({ errors });
-        } else toast.error(ex.response.data.what);
-      } */
       toast.error(ex.message);
     }
   };

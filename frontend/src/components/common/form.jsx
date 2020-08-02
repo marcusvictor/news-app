@@ -9,22 +9,22 @@ const _joiOptions = {
   abortEarly: false,
   language: {
     any: {
-      empty: "é um campo obrigatório"
+      empty: "é um campo obrigatório",
     },
     string: {
       regex: {
         base:
-          ",precisa ter no mínimo 8 caracteres e conter ao menos uma letra maiúscula, uma minúscula, um número e um caracter especial"
+          ",precisa ter no mínimo 8 caracteres e conter ao menos uma letra maiúscula, uma minúscula, um número e um caracter especial",
       },
-      max: "precisa ter {{limit}} caracteres ou menos"
-    }
-  }
+      max: "precisa ter {{limit}} caracteres ou menos",
+    },
+  },
 };
 
 class Form extends Component {
   state = {
     data: {},
-    errors: {}
+    errors: {},
   };
 
   validate() {
@@ -33,7 +33,6 @@ class Form extends Component {
       this.validationSchema,
       _joiOptions
     );
-    //console.log(error);
 
     if (!error) return null;
 
@@ -50,7 +49,7 @@ class Form extends Component {
     return error ? error.details[0].message : null;
   }
 
-  handleSubmit = e => {
+  handleSubmit = (e) => {
     e.preventDefault();
 
     const errors = this.validate();
